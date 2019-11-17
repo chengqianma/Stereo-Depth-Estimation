@@ -31,10 +31,14 @@
 ## Interactions to Accomplish Use Cases
 As for the autonomous driving case, the system will estimate the distance between all things in images like pedestrian, vehicles, obstacles, etc. and our own car. The input will be just a real-time image captured by stereo cameras on cars. The output is a depth image that lighter color means the part in image is much more closer to our car. Before this prediction process, the system needs plenty of images and tagged depth information to train the model, adjusting the parameters.
 
-## Preliminary Plan
-- Data Processing
-- Model Construction
+
+## Plan and Schedule
+- Data Processing -- Finished
+Converting video to images if any. Adjusting features of images as input, like brightness and contrast. Fuzzing processing applies. Converting the input into tensor form that the model can take in. Re-adjusting the quality of pictures according to the feedback of the training and testing model.
+- Model Construction -- Finished
+Based on existing models, constructing and improving the Network Structure.
 - Hyperparameters Setup & Model Training
 - Depth Estimation & Visualization
+Obtaining the tensor of the depth of input images or videos. Evaluating the results of training and testing process. Constructing Graphical User Interface. 
 
-We have already finished the first two steps, we will focus on the rest parts in the coming weeks.
+
