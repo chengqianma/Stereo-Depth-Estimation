@@ -34,11 +34,14 @@ As for the autonomous driving case, the system will estimate the distance betwee
 
 ## Plan and Schedule
 - Data Processing -- Finished
+
 Converting video to images if any. Adjusting features of images as input, like brightness and contrast. Fuzzing processing applies. Converting the input into tensor form that the model can take in. Re-adjusting the quality of pictures according to the feedback of the training and testing model.
 - Model Construction -- Finished
+
 Based on existing models, constructing and improving the Network Structure.
 - Hyperparameters Setup & Model Training
 - Depth Estimation & Visualization
+
 Obtaining the tensor of the depth of input images or videos. Evaluating the results of training and testing process. Constructing Graphical User Interface. 
 
 
