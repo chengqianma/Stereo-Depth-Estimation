@@ -21,6 +21,7 @@ class demo(QWidget):
         self.label = QLabel()
         self.label.setFixedWidth(540)
         self.label.setFixedHeight(360)
+        self.content = QTextEdit()
         layout.addWidget(self.label)
 
         self.btn_2 = QPushButton()
@@ -31,6 +32,7 @@ class demo(QWidget):
         self.label_2 = QLabel()
         self.label_2.setFixedWidth(540)
         self.label_2.setFixedHeight(360)
+        self.content_2 = QTextEdit()
         layout.addWidget(self.label_2)
 
         self.btn_3 = QPushButton()
@@ -49,13 +51,19 @@ class demo(QWidget):
         fname, _ = QFileDialog.getOpenFileName(self, 'Load Image', '', 'Image files(*.jpg *.gif *.png)')
         self.label.setPixmap(QPixmap(fname))
         self.label.setScaledContents(True)
+        self.content.setText(fname)
 
     def load_right_image(self):
         fname, _ = QFileDialog.getOpenFileName(self, 'Load Image', '', 'Image files(*.jpg *.gif *.png)')
         self.label_2.setPixmap(QPixmap(fname))
         self.label_2.setScaledContents(True)
+        self.content_2.setText(fname)
 
     def load_image(self):
+        path = self.content.toPlainText()
+        path_2 = self.content_2.toPlainText()
+        # print(path)
+        # print(path_2)
         fname, _ = QFileDialog.getOpenFileName(self, 'Load Image', '', 'Image files(*.jpg *.gif *.png)')
         self.label_3.setPixmap(QPixmap(fname))
         self.label_3.setScaledContents(True)
