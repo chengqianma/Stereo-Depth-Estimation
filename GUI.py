@@ -2,50 +2,68 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-
+from utils import Test_img
+# import Test_img_sceneflow
+from utils import displayDepth
 
 class demo(QWidget):
 
     def __init__(self, parent=None):
         super(demo, self).__init__(parent)
-        layout = QVBoxLayout()
-
-        self.resize(540, 1080)
+        grid = QGridLayout()
+        self.setLayout(grid)
+        # self.path = None
+        self.width = 720
+        self.height = 194
+        self.resize(1280, 388)
         self.setWindowTitle("Test_Demo")
 
         self.btn = QPushButton()
         self.btn.clicked.connect(self.load_left_image)
         self.btn.setText("Load Left Image")
-        layout.addWidget(self.btn)
+        grid.addWidget(self.btn, 0, 0)
 
         self.label = QLabel()
-        self.label.setFixedWidth(540)
-        self.label.setFixedHeight(360)
+        self.label.setFixedWidth(self.width)
+        self.label.setFixedHeight(self.height)
         self.content = QTextEdit()
-        layout.addWidget(self.label)
+        grid.addWidget(self.label, 1, 0)
 
         self.btn_2 = QPushButton()
         self.btn_2.clicked.connect(self.load_right_image)
         self.btn_2.setText("Load Right Image")
-        layout.addWidget(self.btn_2)
+        grid.addWidget(self.btn_2, 0, 1)
 
         self.label_2 = QLabel()
-        self.label_2.setFixedWidth(540)
-        self.label_2.setFixedHeight(360)
+        self.label_2.setFixedWidth(self.width)
+        self.label_2.setFixedHeight(self.height)
         self.content_2 = QTextEdit()
-        layout.addWidget(self.label_2)
+        grid.addWidget(self.label_2, 1, 1)
 
         self.btn_3 = QPushButton()
         self.btn_3.clicked.connect(self.load_image)
         self.btn_3.setText("Depth Estimation")
-        layout.addWidget(self.btn_3)
+        self.model = QLineEdit()
+        grid.addWidget(self.btn_3, 2, 0)
 
         self.label_3 = QLabel()
-        self.label_3.setFixedWidth(540)
-        self.label_3.setFixedHeight(360)
-        layout.addWidget(self.label_3)
+        self.label_3.setFixedWidth(self.width)
+        self.label_3.setFixedHeight(self.height)
+        self.content_3 = QTextEdit()
+        grid.addWidget(self.label_3, 3, 0)
 
-        self.setLayout(layout)
+        self.btn_4 = QPushButton()
+        self.btn_4.clicked.connect(self.load_depth)
+        self.btn_4.setText("Display Depth")
+        # self.dist = QlineEidt()
+        grid.addWidget(self.btn_4, 2, 1)
+
+        self.label_4 = QLabel()
+        self.label_4.setFixedWidth(self.width)
+        self.label_4.setFixedHeight(self.height)
+        # self.content_3 = QTextEdit()
+        grid.addWidget(self.label_4, 3, 1)
+        # self.setLayout(layout)
 
     def load_left_image(self):
         fname, _ = QFileDialog.getOpenFileName(self, 'Load Image', '', 'Image files(*.jpg *.gif *.png)')
@@ -60,13 +78,34 @@ class demo(QWidget):
         self.content_2.setText(fname)
 
     def load_image(self):
+        # models = ("KITTI", "SceneFlow")
+        # model, ok = QInputDialog.getItem(self, "select model", "model", models, 0, False)
         path = self.content.toPlainText()
         path_2 = self.content_2.toPlainText()
-        # print(path)
-        # print(path_2)
-        fname, _ = QFileDialog.getOpenFileName(self, 'Load Image', '', 'Image files(*.jpg *.gif *.png)')
+        """
+        if ok:
+            if model == "KITTI":
+                Test_img.main(path, path_2)
+            else:
+                Test_img_sceneflow.main(path, path_2)
+        """
+        Test_img.main(path, path_2)
+        fname = path.split(".")[0] + "_disparity.png"
+        self.content_3.setText(fname)
+        # self.path = fname
+        # fname, _ = QFileDialog.getOpenFileName(self, 'Load Image', '', 'Image files(*.jpg *.gif *.png)')
         self.label_3.setPixmap(QPixmap(fname))
         self.label_3.setScaledContents(True)
+
+    def load_depth(self):
+        num, ok = QInputDialog.getInt(self, "Demo", 'Depth')
+        path_3 = self.content_3.toPlainText()
+        if ok:
+            displayDepth.display_depth(path_3, num)
+            fname = "depth_temp.png"
+            self.label_4.setPixmap(QPixmap(fname))
+            self.label_4.setScaledContents(True)
+            # self.dist.setText(str(num))
 
 
 if __name__ == '__main__':
