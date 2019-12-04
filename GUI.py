@@ -2,9 +2,9 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from utils import Test_img
+import Test_img
 # import Test_img_sceneflow
-from utils import displayDepth
+import displayDepth
 
 class demo(QWidget):
 
@@ -13,6 +13,8 @@ class demo(QWidget):
         grid = QGridLayout()
         self.setLayout(grid)
         # self.path = None
+        self.max_dis = 0
+        self.min_dis = 0
         self.width = 720
         self.height = 194
         self.resize(1280, 388)
@@ -89,7 +91,7 @@ class demo(QWidget):
             else:
                 Test_img_sceneflow.main(path, path_2)
         """
-        Test_img.main(path, path_2)
+        self.max_dis, self.min_dis = Test_img.main(path, path_2)
         fname = path.split(".")[0] + "_disparity.png"
         self.content_3.setText(fname)
         # self.path = fname
@@ -98,7 +100,7 @@ class demo(QWidget):
         self.label_3.setScaledContents(True)
 
     def load_depth(self):
-        num, ok = QInputDialog.getInt(self, "Demo", 'Depth')
+        num, ok = QInputDialog.getInt(self, "Demo", 'Depth Min: ' + str(self.max_dis) + " Depth Max: " + str(self.min_dis))
         path_3 = self.content_3.toPlainText()
         if ok:
             displayDepth.display_depth(path_3, num)

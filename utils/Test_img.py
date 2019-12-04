@@ -72,9 +72,19 @@ def main(ileft, iright):
             img = pred_disp[top_pad:,:-left_pad]
        else:
             img = pred_disp
-       # print(img)
+
+       baseline = 0.54
+       focal = 0.006
+       pixel_size = 4.65 * 0.000001
+       max_dis = max(map(max, img))
+       max_dis = (baseline * focal) / (max_dis * 2 * pixel_size)
+       max_dis = int(np.ceil(max_dis))
+       min_dis = min(map(min, img))
+       min_dis = (baseline * focal) / (min_dis * 2 * pixel_size)
+       min_dis = int(np.floor((min_dis)))
+
        img = (img*256).astype('uint16')
-       # print(img)
+
        if ileft and iright:
             new_path = ileft.split(".")[0] + "_disparity.png"
             skimage.io.imsave(new_path, img)
@@ -84,7 +94,8 @@ def main(ileft, iright):
             plt.show()
        else:
             skimage.io.imsave('disparity.png',img)
-       
+
+       return max_dis, min_dis
        #img = np.concatenate((imgL_o, imgR_o),axis=1)
        #img = cv2.line(img, (0, 240), (1504, 240), (0, 0, 255), 2)
        #img = cv2.line(img, (0, 210), (1504, 210), (0, 0, 255), 2)
