@@ -10,7 +10,9 @@ import skimage.io
 import skimage.transform
 import numpy as np
 import time
-from utils import preprocess 
+import preprocess
+import sys
+sys.path.append('..')
 from models import *
 import cv2
 import matplotlib.pyplot as plt
@@ -82,55 +84,53 @@ def main(ileft, iright):
        #skimage.io.imsave('test.png',img)
 
 
+parser = argparse.ArgumentParser(description='PSMNet')
+parser.add_argument('--KITTI', default='2015',
+                    help='KITTI version')
+parser.add_argument('--datapath', default=None,
+                    help='select model')
+parser.add_argument('--loadmodel', default='../trained/KITTI2015.tar',
+                    help='loading model')
+parser.add_argument('--leftimg', default=None,
+                    help='load model')
+parser.add_argument('--rightimg', default=None,
+                    help='load model')
+parser.add_argument('--isgray', default=False,
+                    help='load model')
+parser.add_argument('--model', default='stackhourglass',
+                    help='select model')
+parser.add_argument('--maxdisp', type=int, default=192,
+                    help='maxium disparity')
+parser.add_argument('--no-cuda', action='store_true', default=False,
+                    help='enables CUDA training')
+parser.add_argument('--seed', type=int, default=1, metavar='S',
+                    help='random seed (default: 1)')
+args = parser.parse_args()
+args.cuda = not args.no_cuda and torch.cuda.is_available()
+
+torch.manual_seed(args.seed)
+if args.cuda:
+    torch.cuda.manual_seed(args.seed)
+
+if args.model == 'stackhourglass':
+    model = stackhourglass(args.maxdisp)
+elif args.model == 'basic':
+    model = basic(args.maxdisp)
+else:
+    print('no model')
+
+model = nn.DataParallel(model, device_ids=[0])
+model.cuda()
+
+if args.loadmodel is not None:
+    print('load SDENet')
+    state_dict = torch.load(args.loadmodel)
+    model.load_state_dict(state_dict['state_dict'])
+
+print('Number of model parameters: {}'.format(sum([p.data.nelement() for p in model.parameters()])))
 
 if __name__ == '__main__':
-    
-    parser = argparse.ArgumentParser(description='PSMNet')
-    parser.add_argument('--KITTI', default='2015',
-                        help='KITTI version')
-    parser.add_argument('--datapath', default= None,
-                        help='select model')
-    parser.add_argument('--loadmodel', default='./trained/KITTI2015.tar',
-                        help='loading model')
-    parser.add_argument('--leftimg', default= None,
-                        help='load model')
-    parser.add_argument('--rightimg', default= None,
-                        help='load model')
-    parser.add_argument('--isgray', default= False,
-                        help='load model')
-    parser.add_argument('--model', default='stackhourglass',
-                        help='select model')
-    parser.add_argument('--maxdisp', type=int, default=192,
-                        help='maxium disparity')
-    parser.add_argument('--no-cuda', action='store_true', default=False,
-                        help='enables CUDA training')
-    parser.add_argument('--seed', type=int, default=1, metavar='S',
-                        help='random seed (default: 1)')
-    args = parser.parse_args()
-    args.cuda = not args.no_cuda and torch.cuda.is_available()
 
-    torch.manual_seed(args.seed)
-    if args.cuda:
-        torch.cuda.manual_seed(args.seed)
-
-    if args.model == 'stackhourglass':
-        model = stackhourglass(args.maxdisp)
-    elif args.model == 'basic':
-        model = basic(args.maxdisp)
-    else:
-        print('no model')
-
-    model = nn.DataParallel(model, device_ids=[0])
-    model.cuda()
-
-
-    if args.loadmodel is not None:
-        print('load SDENet')
-        state_dict = torch.load(args.loadmodel)
-        model.load_state_dict(state_dict['state_dict'])
-
-    print('Number of model parameters: {}'.format(sum([p.data.nelement() for p in model.parameters()])))
-    
     main()
 
 
