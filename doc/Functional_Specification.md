@@ -1,12 +1,5 @@
 ## Functional Specification
 --------------------
-### Background
-Depth estimation from stereo cameras has been a research topic for a long time.Since depth estimation from stereo images is essential to computer vision applications, including autonomous driving for vehicles, 3D model reconstruction, and object detection and recognition. 
-
-Traditional method uses disparity between stereo camera images to cacluate the depth, but it still has lots of problems in cacluating the disparity map especially in potential feature matching part. 
-
-With the fast development of deep learning, people can do a much better job in feature matching by using convolutional nerual network. So we want to use deep learning method to do the depth estimation from stereo cameras.
-
 ### User profile
 
 Professional engineers such as autonomous driving researchers, AR developers, and developers of image-processing software. They may not use python but must be skilled in calling software packages and extracting information from images. They should harbor solid understanding of numerical methods, optimization, structure from motion, signal and image processing, probabilistic methods.
