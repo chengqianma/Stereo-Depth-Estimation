@@ -1,9 +1,10 @@
 # Stereo-Depth-Estimation-Network
-----------------------------------
+
 **Contributors**
 - Chengqian Ma
 - Bingkun Li
 - Robert Chang
+----------------------------------
 
 ## Background
 Depth estimation from stereo cameras has been a research topic for a long time. Since depth estimation from stereo images is essential to computer vision applications, including autonomous driving for vehicles, 3D model reconstruction, and object detection and recognition.
@@ -66,12 +67,23 @@ pip install -r requirements.txt
 Now, you should be ready to run `Stereo-Depth-Estimation-Network` on  your computer. 
 
 ## Tutorial: how to use
-Make sure that the camera parameters in `config.py` are correctly corresponding to the dataset you want to use. Default settings are based on KITTI 2015.
+#### API
+- `generate_depth(left...!!!) `
+    Takes the paramters of path of left image and right image and returns a matrix of depth(Unit: m) in a `.pickle` file.
+    
+- `generate_disparity_image(left...!!!)` 
+    Takes in the path of left and right image and returns a disparity image as `.png` file. 
 
-users modify camera parameters. config.py
+- `generate_specific_depth_area(left..., depth!!!)`
+    Takes the path of left and right image and depth(Unit: m). It returns a list of coordinates(x, y) of pixels representing the given depth on the depth image. 
+    
+#### Depth Estimation Demo
+Click "Load Left Image" and "Load Right Image" to load the image pair. 
 
-api generate_depth, takes in left image and right image.  depth info matrix with unit: m in `.pickle` file
+----
+<img src="doc/Layers.png">
+----
 
-api generate_disparity_image takes in left image and right image. returns `.png` file. 
+Click "Depth Estimation" to run the model and get the depth image. Click "Display Depth"   to highlight the area in a certain distance.
 
-api generate_specific_depth_area: take in left path, right path and depth can be float. returns a list[x, y]
+Notice: Default camera parameters are only set for KITTI 2015. Make sure that camera parameters in `config.py` are corresponding correctly.
