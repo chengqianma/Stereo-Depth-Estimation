@@ -82,12 +82,15 @@ Now, you should be ready to run `Stereo-Depth-Estimation-Network` on  your compu
 ## Tutorial: how to use
 #### API
 - `generate_depth_file(path_left, path_right, baseline, focal, pixel_size)`
+    
     Takes the paramters of path of left image and right image and returns a matrix of depth(Unit: m) in a `.pickle` file.
     
 - `generate_disparity_image(path_left, path_right)` 
+    
     Takes in the path of left and right image and returns a disparity image as a `.png` file. 
 
 - `generate_specific_depth_area(path_left, path_right, depth, baseline, focal, pixel_size)`
+    
     Takes the path of left and right image and depth(Unit: m). It returns a list of coordinates(x, y) of pixels representing the given depth on the depth image. 
 
 #### Depth Estimation Demo
@@ -99,4 +102,4 @@ Click "Load Left Image" and "Load Right Image" to load the image pair.
 
 Click "Depth Estimation" to run the model and get the depth image. Click "Display Depth" to highlight the area in a certain distance.
 
-Notice: Default camera parameters are only set for KITTI 2015. Make sure that camera parameters in `config.py` are correctly matched for GUI. Or you can enter set parameters while invoking APIs. 
+Notice: Default camera parameters are only set for KITTI 2015. Make sure that camera parameters in `config.py` are correctly matched for GUI. Or you can set new parameters while invoking APIs. 
