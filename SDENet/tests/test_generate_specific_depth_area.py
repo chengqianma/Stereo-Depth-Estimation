@@ -7,9 +7,9 @@ from utils import generate_specific_depth_area
 from utils import config
 
 
-path_left = "../test/000047_10.png"
-path_right = "../test/000047_10_r.png"
-path_result = "../test/000047_10_disparity.png"
+path_left = "../sample_image/000047_10.png"
+path_right = "../sample_image/000047_10_r.png"
+path_result = "../sample_image/000047_10_disparity.png"
 
 max_depth, min_depth = display_depth.max_min_depth(path_result, config.baseline, config.focal, config.pixel_size)
 

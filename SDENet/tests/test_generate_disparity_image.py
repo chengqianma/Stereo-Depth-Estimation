@@ -7,8 +7,8 @@ import numpy as np
 import unittest
 
 
-path_left = "../test/000047_10.png"
-path_right = "../test/000047_10_r.png"
+path_left = "../sample_image/000047_10.png"
+path_right = "../sample_image/000047_10_r.png"
 
 
 class TestCase(unittest.TestCase):
