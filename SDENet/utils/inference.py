@@ -132,9 +132,3 @@ print('Number of model parameters: {}'.format(sum([p.data.nelement() for p in mo
 if __name__ == '__main__':
 
     main()
-
-
-
-
-
-
