@@ -10,11 +10,7 @@ from utils import generate_specific_depth_area
 from utils import config
 
 
-PATH_LEFT = "../sample_image/000047_10.png"
-PATH_RIGHT = "../sample_image/000047_10_r.png"
-PATH_RESULT = "../sample_image/000047_10_disparity.png"
-
-MAX_DEPTH, MIN_DEPTH = display_depth.max_MIN_DEPTH(PATH_RESULT,
+MAX_DEPTH, MIN_DEPTH = display_depth.max_MIN_DEPTH(config.PATH_RESULT,
                                                    config.BASELINE, config.FOCAL, config.PIXEL_SIZE)
 
 
@@ -23,7 +19,8 @@ class TestCase(unittest.TestCase):
     def test_depth_upper_bound(self):
         '''Test if the maximum depth could match some area'''
         depth = MAX_DEPTH
-        area = generate_specific_depth_area.generate_specific_depth_area(PATH_LEFT, PATH_RIGHT,
+        area = generate_specific_depth_area.generate_specific_depth_area(config.PATH_LEFT,
+                                                                         config.PATH_RIGHT,
                                                                          depth, config.BASELINE,
                                                                          config.FOCAL,
                                                                          config.PIXEL_SIZE)
@@ -32,7 +29,8 @@ class TestCase(unittest.TestCase):
     def test_depth_lower_bound(self):
         '''Test if the minimum depth could match some area'''
         depth = MIN_DEPTH
-        area = generate_specific_depth_area.generate_specific_depth_area(PATH_LEFT, PATH_RIGHT,
+        area = generate_specific_depth_area.generate_specific_depth_area(config.PATH_LEFT,
+                                                                         config.PATH_RIGHT,
                                                                          depth, config.BASELINE,
                                                                          config.FOCAL,
                                                                          config.PIXEL_SIZE)
@@ -41,7 +39,8 @@ class TestCase(unittest.TestCase):
     def test_depth_out_of_range(self):
         '''Test if error input could cause error generation'''
         depth = MAX_DEPTH + MIN_DEPTH
-        area = generate_specific_depth_area.generate_specific_depth_area(PATH_LEFT, PATH_RIGHT,
+        area = generate_specific_depth_area.generate_specific_depth_area(config.PATH_LEFT,
+                                                                         config.PATH_RIGHT,
                                                                          depth, config.BASELINE,
                                                                          config.FOCAL,
                                                                          config.PIXEL_SIZE)
@@ -50,7 +49,8 @@ class TestCase(unittest.TestCase):
     def test_depth_format(self):
         '''Test the output area data format'''
         depth = MIN_DEPTH
-        area = generate_specific_depth_area.generate_specific_depth_area(PATH_LEFT, PATH_RIGHT,
+        area = generate_specific_depth_area.generate_specific_depth_area(config.PATH_LEFT,
+                                                                         config.PATH_RIGHT,
                                                                          depth, config.BASELINE,
                                                                          config.FOCAL,
                                                                          config.PIXEL_SIZE)
