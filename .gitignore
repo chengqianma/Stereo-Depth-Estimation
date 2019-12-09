@@ -3,3 +3,6 @@
 *.pkl
 test/
 .idea/
+build/
+dist/
+Stereo_Depth_Estimation_Network.egg-info/
