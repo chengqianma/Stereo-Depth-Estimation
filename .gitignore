@@ -1,5 +1,4 @@
 *.pyc
-*.png
 *.pkl
 test/
 .idea/
