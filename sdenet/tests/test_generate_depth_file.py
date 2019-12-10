@@ -8,6 +8,8 @@ sys.path.append("..")
 from utils import generate_depth_file
 import config
 import pickle
+import cv2
+import numpy as np
 
 class TestCase(unittest.TestCase):
     '''Test case'''
@@ -30,7 +32,13 @@ class TestCase(unittest.TestCase):
 
     def test_depth_info(self):
         '''Test the matrix size of the depth file'''
-
+        generate_depth_file.generate_depth_file(config.PATH_LEFT, config.PATH_RIGHT,
+                                                config.BASELINE, config.FOCAL, config.PIXEL_SIZE)
+        new_path = config.PATH_LEFT[:-4] + "_depth_info.pkl"
+        file = open(new_path)
+        matrix = pickle.load(file)
+        img = cv2.imread(config.PATH_LEFT)
+        self.assertEqual(np.shape(matrix), np.shape(img[:,:,0]), "Disparity size error")
 
 if __name__ == '__main__':
     unittest.main()

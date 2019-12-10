@@ -1,8 +1,11 @@
 '''
 Generate specific depth area
 '''
-import inference
-import config
+
+import sys
+sys.path.append("..")
+from utils import inference
+from utils import config
 
 
 def generate_specific_depth_area(path_left, path_right, depth, baseline, focal, pixel_size):

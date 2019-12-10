@@ -3,7 +3,9 @@ Generate disparity image
 '''
 import skimage
 import skimage.io
-import inference
+import sys
+sys.path.append("..")
+from utils import inference
 
 
 def generate_disparity_image(path_left, path_right):

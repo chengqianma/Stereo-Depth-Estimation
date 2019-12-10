@@ -1,8 +1,10 @@
 '''
 Generate depth pickle file 
 '''
+import sys
+sys.path.append("..")
 import pickle
-import inference
+from utils import inference
 
 
 def generate_depth_file(path_left, path_right, baseline, focal, pixel_size):
