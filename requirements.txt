@@ -10,7 +10,7 @@ cytoolz==0.10.0
 dask==0.15.2
 decorator==4.4.1
 enum34==1.1.6
-functools32==3.2.3.post2
+functools32==3.2.3
 futures==3.3.0
 imageio==2.6.1
 isort==4.3.21
