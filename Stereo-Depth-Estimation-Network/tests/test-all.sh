@@ -1,0 +1,3 @@
+python test_generate_depth_file.py
+python test_generate_disparity_image.py
+python test_generate_specific_depth_area.py
