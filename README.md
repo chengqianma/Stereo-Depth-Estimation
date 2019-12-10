@@ -6,19 +6,22 @@
 - Robert Chang
 ----------------------------------
 
+
 ## Background
+
 Depth estimation based on stereo cameras has been a research topic for a long time. Since depth estimation from stereo images is essential to computer vision applications, including autonomous driving for vehicles, 3D model reconstruction, and object detection and recognition.
 
 Traditional method uses disparity between stereo camera images to calculate the depth, but it has problems in calculating the disparity map especially in the matching part of potential features.
 
 With the fast development of deep learning, people can do a better job in feature matching by using Convolutional Neural Network. We want to use deep-learning method to achieve the depth estimation based on stereo cameras.
 
+
 ## Organization of the project
 
 The package is organized as the following structure:
 
     Stereo-Depth-Estimation-Network(final)
-    /--- SDENet/
+    /--- Stereo-Depth-Estimation-Network/
         /--- models/
             /--- __init__.py
             /--- basic.py
@@ -49,15 +52,19 @@ The package is organized as the following structure:
     /--- README.md
     /--- requirements.txt
     /--- setup.py
-    
+
+
 ## Data sources
+
 - KITTI 2015: a real-world dataset with street views from a driving car. It contains 200 training stereo image pairs with sparse ground-truth disparities obtained using LiDAR and another 200 testing image pairs without ground-truth disparities. Image size is H = 376 and W = 1240.
 http://www.cvlibs.net/datasets/kitti/
 
 - Scene Flow: a large scale synthetic dataset containing 35454 training and 4370 testing images with H = 540 and W = 960. This dataset provides dense and elaborate disparity maps as ground truth.
 https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html
 
+
 ## Installation
+
 #### Step 1: Install Stereo-Depth-Estimation-Network by cloning it on you computer with `git` command:
 
 ```
@@ -79,9 +86,11 @@ python setup.py install
 pip install -r requirements.txt
 ```
 
-Now, you should be ready to run `Stereo-Depth-Estimation-Network` on  your computer. 
+Now, you are ready to run `Stereo-Depth-Estimation-Network` on  your computer. 
+
 
 ## Tutorial: how to use
+
 #### APIs
 - `generate_depth_file(path_left, path_right, baseline, focal, pixel_size)`
     
@@ -96,6 +105,13 @@ Now, you should be ready to run `Stereo-Depth-Estimation-Network` on  your compu
     Takes the path of left and right image, depth(Unit: m) and camera parameters--baseline, focal and pixel_size.. Returns a list of coordinates(x, y) of pixels on the depth image. 
 
 #### Depth Estimation Demo
+The Demo is located at `(Your Path)/Stereo-Depth-Estimation-Network/Stereo-Depth-Estimation-Network/utils`. Enter the following command to launch after finishing installation:
+
+```
+cd Stereo-Depth-Estimation-Network/utils
+python SdenetDemo.py
+```
+
 Click "Load Left Image" and "Load Right Image" to load the image pair. 
 
 ----
@@ -108,4 +124,4 @@ Click "Depth Estimation" to run the model and get the depth image. Click "Displa
 <img src="doc/estimation.jpg">
 ----
 
-Notice: Default camera parameters are only set for KITTI 2015. Before running the model, make sure that camera parameters in `config.py` are correctly matched if another dataset applies. Or you can set new parameters while invoking APIs. 
+Notice: Default camera parameters are only set for KITTI 2015. Before running the model, make sure that those parameters in `config.py` are correctly matched if another dataset applies. Or, you can set new parameters while invoking APIs. 
