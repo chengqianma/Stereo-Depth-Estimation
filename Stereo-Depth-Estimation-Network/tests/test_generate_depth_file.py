@@ -6,7 +6,7 @@ import unittest
 import sys
 sys.path.append("..")
 from utils import generate_depth_file
-from utils import config
+import config
 
 
 class TestCase(unittest.TestCase):

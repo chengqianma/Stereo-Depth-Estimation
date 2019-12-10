@@ -8,7 +8,7 @@ import numpy as np
 import cv2
 sys.path.append("..")
 from utils import generate_disparity_image
-from utils import config
+import config
 
 
 class TestCase(unittest.TestCase):

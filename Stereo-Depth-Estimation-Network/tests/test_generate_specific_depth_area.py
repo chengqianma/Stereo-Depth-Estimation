@@ -7,10 +7,10 @@ import numpy as np
 sys.path.append("..")
 from utils import display_depth
 from utils import generate_specific_depth_area
-from utils import config
+import config
 
 
-MAX_DEPTH, MIN_DEPTH = display_depth.max_MIN_DEPTH(config.PATH_RESULT,
+MAX_DEPTH, MIN_DEPTH = display_depth.max_min_depth(config.PATH_RESULT,
                                                    config.BASELINE, config.FOCAL, config.PIXEL_SIZE)
 
 
