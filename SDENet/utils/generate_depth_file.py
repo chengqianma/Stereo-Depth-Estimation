@@ -1,9 +1,12 @@
-import inference
+'''
+Generate depth pickle file 
+'''
 import pickle
-import config
+import inference
 
 
 def generate_depth_file(path_left, path_right, baseline, focal, pixel_size):
+    '''Store the depth output into pickle file'''
     info = inference.main(path_left, path_right)
     for i in range(len(info)):
         for j in range(len(info[0])):

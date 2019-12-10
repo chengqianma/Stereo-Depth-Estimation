@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 
 
 def test(imgL,imgR):
+    '''use convolution model to compute the disparity distribution'''
         model.eval()
 
         if args.cuda:
@@ -37,6 +38,7 @@ def test(imgL,imgR):
 
 
 def main(ileft, iright):
+    '''image preprocess and generate disparity info'''
        processed = preprocess.get_transform(augment=False)
        if ileft and iright:
            args.leftimg = ileft
@@ -77,11 +79,6 @@ def main(ileft, iright):
 
 
        return img
-       #img = np.concatenate((imgL_o, imgR_o),axis=1)
-       #img = cv2.line(img, (0, 240), (1504, 240), (0, 0, 255), 2)
-       #img = cv2.line(img, (0, 210), (1504, 210), (0, 0, 255), 2)
-       #img = cv2.line(img, (0, 270), (1504, 270), (0, 0, 255), 2)
-       #skimage.io.imsave('test.png',img)
 
 
 parser = argparse.ArgumentParser(description='PSMNet')
@@ -132,9 +129,3 @@ print('Number of model parameters: {}'.format(sum([p.data.nelement() for p in mo
 if __name__ == '__main__':
 
     main()
-
-
-
-
-
-
