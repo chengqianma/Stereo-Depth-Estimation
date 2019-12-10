@@ -64,10 +64,12 @@ https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.h
 git clone https://github.com/chengqianma/Stereo-Depth-Estimation-Network.git
 ```
 
-#### Step 2: Install the the package you need in the environment by running `setup.py`  file:
+#### Step 2: Create the environment and install the package you need with the command:
 
 ```
 cd Stereo-Depth-Estimation-Network/
+conda create --name [environment name] python=2.7
+conda install PyQt5
 python setup.py install
 ```
 
@@ -80,7 +82,7 @@ pip install -r requirements.txt
 Now, you should be ready to run `Stereo-Depth-Estimation-Network` on  your computer. 
 
 ## Tutorial: how to use
-#### API
+#### APIs
 - `generate_depth_file(path_left, path_right, baseline, focal, pixel_size)`
     
     Takes the paramters of path of left image, right image and camera parameters--baseline, focal and pixel_size. Returns a matrix of depth(Unit: m) in a `.pickle` file.
@@ -97,9 +99,13 @@ Now, you should be ready to run `Stereo-Depth-Estimation-Network` on  your compu
 Click "Load Left Image" and "Load Right Image" to load the image pair. 
 
 ----
-<img src="doc/Layers.png">
+<img src="doc/input_image.jpg">
 ----
 
 Click "Depth Estimation" to run the model and get the depth image. Click "Display Depth" to highlight the area in a certain distance.
 
-Notice: Default camera parameters are only set for KITTI 2015. In GUI, make sure that camera parameters in `config.py` are correctly matched if another dataset applies. Or you can set new parameters while invoking APIs. 
+----
+<img src="doc/estimation.jpg">
+----
+
+Notice: Default camera parameters are only set for KITTI 2015. Before running the model, make sure that camera parameters in `config.py` are correctly matched if another dataset applies. Or you can set new parameters while invoking APIs. 
