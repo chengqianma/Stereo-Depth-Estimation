@@ -131,4 +131,4 @@ Click "Depth Estimation" to run the model and get the depth image. Click "Displa
 <img src="doc/estimation.jpg">
 ----
 
-Notice: Default camera parameters are only set for KITTI 2015. Before running the model, make sure that those parameters in `config.py` are correctly matched if another dataset applies. Or, you can set new parameters while invoking APIs. 
+Notice: Default camera parameters are only set for KITTI 2015. Make sure that those parameters in `config.py` are correctly matched if another dataset applies. Or, you can set new parameters while invoking APIs. 
