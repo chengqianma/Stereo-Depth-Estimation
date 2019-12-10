@@ -28,6 +28,9 @@ class TestCase(unittest.TestCase):
         file = pickle.load(file)
         self.assertIsNot(file, [], "Generate wrong depth file")
 
+    def test_depth_info(self):
+        '''Test the matrix size of the depth file'''
+
 
 if __name__ == '__main__':
     unittest.main()
