@@ -18,8 +18,6 @@ install:
 
     - hash -r
 
-    - conda install PyQt5
-
     - pip install -r requirements.txt
 
 
