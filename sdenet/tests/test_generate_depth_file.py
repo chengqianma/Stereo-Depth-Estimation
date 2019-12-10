@@ -19,6 +19,8 @@ class TestCase(unittest.TestCase):
         is_exist = os.path.exists(new_path)
         self.assertTrue(is_exist)
 
+    def test_pickle_file(self):
+        
 
 if __name__ == '__main__':
     unittest.main()
