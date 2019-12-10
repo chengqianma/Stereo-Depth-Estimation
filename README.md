@@ -32,7 +32,7 @@ The package is organized as the following structure:
             /--- KITTI2015.tar
             /--- sceneflow.tar
         /--- utils/
-            /--- GUI.py            
+            /--- SdenetDemo.py            
             /--- __init__.py
             /--- config.py
             /--- display_depth.py
