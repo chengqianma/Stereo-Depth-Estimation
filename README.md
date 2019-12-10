@@ -41,14 +41,14 @@ The package is organized as the following structure:
             /--- generate_specific_depth_area.py
             /--- inference.py
             /--- preprocess.py
-        /--- doc/
-            /--- Component_Specification.md
-            /--- Functional_Specification.md
-        /--- .gitignore
-        /--- LICENSE.txt
-        /--- README.md
-        /--- requirements.txt
-        /--- setup.py
+    /--- doc/
+        /--- Component_Specification.md
+        /--- Functional_Specification.md
+    /--- .gitignore
+    /--- LICENSE.txt
+    /--- README.md
+    /--- requirements.txt
+    /--- setup.py
     
 ## Data sources
 - KITTI 2015: a real-world dataset with street views from a driving car. It contains 200 training stereo image pairs with sparse ground-truth disparities obtained using LiDAR and another 200 testing image pairs without ground-truth disparities. Image size is H = 376 and W = 1240.
