@@ -20,12 +20,13 @@ class TestCase(unittest.TestCase):
         self.assertTrue(is_exist)
 
     def test_pickle_file(self):
-        '''Test the content of the depth file'''
+        '''Test whether the depth file is empty or not'''
         generate_depth_file.generate_depth_file(config.PATH_LEFT, config.PATH_RIGHT,
                                                 config.BASELINE, config.FOCAL, config.PIXEL_SIZE)
         new_path = config.PATH_LEFT[:-4] + "_depth_info.pkl"
         file = open(new_path)
         file = pickle.load(file)
+        self.assertIsNot(file, [], "Generate wrong depth file")
 
 
 if __name__ == '__main__':
