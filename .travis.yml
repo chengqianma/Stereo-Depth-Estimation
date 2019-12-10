@@ -23,7 +23,7 @@ install:
 
 script: 
 
-- cd Stereo-Depth-Estimation-Network/utils/
+- cd sdenet/utils/
 
 - sh test_all.sh
 
