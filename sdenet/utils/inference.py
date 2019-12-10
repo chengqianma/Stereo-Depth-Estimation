@@ -20,65 +20,66 @@ import matplotlib.pyplot as plt
 
 def test(imgL,imgR):
     '''use convolution model to compute the disparity distribution'''
-        model.eval()
 
-        if args.cuda:
-           imgL = torch.FloatTensor(imgL).cuda()
-           imgR = torch.FloatTensor(imgR).cuda()     
+    model.eval()
 
-        imgL, imgR= Variable(imgL), Variable(imgR)
+    if args.cuda:
+       imgL = torch.FloatTensor(imgL).cuda()
+       imgR = torch.FloatTensor(imgR).cuda()
 
-        with torch.no_grad():
-            disp = model(imgL,imgR)
+    imgL, imgR= Variable(imgL), Variable(imgR)
 
-        disp = torch.squeeze(disp)
-        pred_disp = disp.data.cpu().numpy()
+    with torch.no_grad():
+        disp = model(imgL,imgR)
 
-        return pred_disp
+    disp = torch.squeeze(disp)
+    pred_disp = disp.data.cpu().numpy()
+
+    return pred_disp
 
 
 def main(ileft, iright):
     '''image preprocess and generate disparity info'''
-       processed = preprocess.get_transform(augment=False)
-       if ileft and iright:
-           args.leftimg = ileft
-           args.rightimg = iright
-       if args.isgray:
-           imgL_o = cv2.cvtColor(cv2.imread(args.leftimg,0), cv2.COLOR_GRAY2RGB)
-           imgR_o = cv2.cvtColor(cv2.imread(args.rightimg,0), cv2.COLOR_GRAY2RGB)
-       else:
-           imgL_o = (skimage.io.imread(args.leftimg).astype('float32'))
-           imgR_o = (skimage.io.imread(args.rightimg).astype('float32'))
-       
-       imgL = processed(imgL_o).numpy()
-       imgR = processed(imgR_o).numpy()
-       imgL = np.reshape(imgL,[1,3,imgL.shape[1],imgL.shape[2]])
-       imgR = np.reshape(imgR,[1,3,imgR.shape[1],imgR.shape[2]])
+    processed = preprocess.get_transform(augment=False)
+    if ileft and iright:
+       args.leftimg = ileft
+       args.rightimg = iright
+    if args.isgray:
+       imgL_o = cv2.cvtColor(cv2.imread(args.leftimg,0), cv2.COLOR_GRAY2RGB)
+       imgR_o = cv2.cvtColor(cv2.imread(args.rightimg,0), cv2.COLOR_GRAY2RGB)
+    else:
+       imgL_o = (skimage.io.imread(args.leftimg).astype('float32'))
+       imgR_o = (skimage.io.imread(args.rightimg).astype('float32'))
 
-       # pad to width and hight to 16 times
-       if imgL.shape[2] % 16 != 0:
-            times = imgL.shape[2]//16       
-            top_pad = (times+1)*16 -imgL.shape[2]
-       else:
-            top_pad = 0
-       if imgL.shape[3] % 16 != 0:
-            times = imgL.shape[3]//16                       
-            left_pad = (times+1)*16-imgL.shape[3]
-       else:
-            left_pad = 0     
-       imgL = np.lib.pad(imgL,((0,0),(0,0),(top_pad,0),(0,left_pad)),mode='constant',constant_values=0)
-       imgR = np.lib.pad(imgR,((0,0),(0,0),(top_pad,0),(0,left_pad)),mode='constant',constant_values=0)
+    imgL = processed(imgL_o).numpy()
+    imgR = processed(imgR_o).numpy()
+    imgL = np.reshape(imgL,[1,3,imgL.shape[1],imgL.shape[2]])
+    imgR = np.reshape(imgR,[1,3,imgR.shape[1],imgR.shape[2]])
 
-       start_time = time.time()
-       pred_disp = test(imgL,imgR)
-       print('time = %.2f' %(time.time() - start_time))
-       if top_pad !=0 or left_pad != 0:
-            img = pred_disp[top_pad:,:-left_pad]
-       else:
-            img = pred_disp
+    # pad to width and hight to 16 times
+    if imgL.shape[2] % 16 != 0:
+        times = imgL.shape[2]//16
+        top_pad = (times+1)*16 -imgL.shape[2]
+    else:
+        top_pad = 0
+    if imgL.shape[3] % 16 != 0:
+        times = imgL.shape[3]//16
+        left_pad = (times+1)*16-imgL.shape[3]
+    else:
+        left_pad = 0
+    imgL = np.lib.pad(imgL,((0,0),(0,0),(top_pad,0),(0,left_pad)),mode='constant',constant_values=0)
+    imgR = np.lib.pad(imgR,((0,0),(0,0),(top_pad,0),(0,left_pad)),mode='constant',constant_values=0)
+
+    start_time = time.time()
+    pred_disp = test(imgL,imgR)
+    print('time = %.2f' %(time.time() - start_time))
+    if top_pad !=0 or left_pad != 0:
+        img = pred_disp[top_pad:,:-left_pad]
+    else:
+        img = pred_disp
 
 
-       return img
+    return img
 
 
 parser = argparse.ArgumentParser(description='PSMNet')
@@ -127,5 +128,4 @@ if args.loadmodel is not None:
 print('Number of model parameters: {}'.format(sum([p.data.nelement() for p in model.parameters()])))
 
 if __name__ == '__main__':
-
     main()
