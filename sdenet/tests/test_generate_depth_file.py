@@ -20,7 +20,10 @@ class TestCase(unittest.TestCase):
         self.assertTrue(is_exist)
 
     def test_pickle_file(self):
-        
+        '''Test the content of the depth file'''
+        generate_depth_file.generate_depth_file(config.PATH_LEFT, config.PATH_RIGHT,
+                                                config.BASELINE, config.FOCAL, config.PIXEL_SIZE)
+        new_path = config.PATH_LEFT[:-4] + "_depth_info.pkl"
 
 if __name__ == '__main__':
     unittest.main()
