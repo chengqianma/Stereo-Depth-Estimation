@@ -41,7 +41,7 @@ class TestCase(unittest.TestCase):
             temp = True
         else:
             temp = False
-            
+
         self.assertTrue(temp)
 
 

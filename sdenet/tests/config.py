@@ -12,6 +12,6 @@ RANGE = 1
 # max disparity range
 DISPARITY_RANGE = 192
 # image path
-PATH_LEFT = "../sample_image/000047_10.png"
-PATH_RIGHT = "../sample_image/000047_10_r.png"
-PATH_RESULT = "../sample_image/000047_10_disparity.png"
+PATH_LEFT = "../sample_image/000047_10_left.png"
+PATH_RIGHT = "../sample_image/000047_10_right.png"
+PATH_RESULT = "../sample_image/000047_10_left_disparity.png"
