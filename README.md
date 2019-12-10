@@ -70,6 +70,7 @@ https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.h
 
 
 ## Installation
+***Please install and run in Linux.***
 
 #### Step 1: Install Stereo-Depth-Estimation-Network by cloning it on you computer with `git` command:
 
