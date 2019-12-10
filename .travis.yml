@@ -1,0 +1,29 @@
+language: python
+
+
+
+python: '2.7'
+
+
+
+install:
+
+
+    - conda create --name stereo python=2.7
+
+    - conda activate stereo
+
+    - conda install PyQt5
+
+    - pip install -r requirements.txt
+
+
+script: 
+
+- cd Stereo-Depth-Estimation-Network/utils/
+
+- sh test_all.sh
+
+
+
+after_success: coveralls
