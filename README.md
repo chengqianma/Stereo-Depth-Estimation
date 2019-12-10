@@ -1,4 +1,4 @@
-# Stereo-Depth-Estimation-Network
+# Stereo-Depth-Estimation-Network(sdenet)
 
 **Contributors**
 - Chengqian Ma
@@ -20,14 +20,17 @@ With the fast development of deep learning, people can do a better job in featur
 
 The package is organized as the following structure:
 
-    Stereo-Depth-Estimation-Network(final)
-    /--- Stereo-Depth-Estimation-Network/
+    sdenet(final)
+    /--- sdenet/
         /--- models/
             /--- __init__.py
             /--- basic.py
             /--- stackhourglass.py
             /--- submodule.py
+        /--- sample_image/
         /--- tests/
+            /--- config.py
+            /--- test_all.sh
             /--- test_generate_depth_file.py
             /--- test_generate_disparity_image.py
             /--- test_generate_specific_depth_area.py
@@ -44,10 +47,13 @@ The package is organized as the following structure:
             /--- generate_specific_depth_area.py
             /--- inference.py
             /--- preprocess.py
+        /--- __init__.py
     /--- doc/
+        /--- CSE583_Final_Presentation.pdf
         /--- Component_Specification.md
         /--- Functional_Specification.md
     /--- .gitignore
+    /--- .travis.yml
     /--- LICENSE.txt
     /--- README.md
     /--- requirements.txt
@@ -68,13 +74,13 @@ https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.h
 #### Step 1: Install Stereo-Depth-Estimation-Network by cloning it on you computer with `git` command:
 
 ```
-git clone https://github.com/chengqianma/Stereo-Depth-Estimation-Network.git
+git clone https://github.com/chengqianma/sdenet.git
 ```
 
 #### Step 2: Create the environment and install the package you need with the command:
 
 ```
-cd Stereo-Depth-Estimation-Network/
+cd sdenet/
 conda create --name [environment name] python=2.7
 conda install PyQt5
 python setup.py install
@@ -86,7 +92,7 @@ python setup.py install
 pip install -r requirements.txt
 ```
 
-Now, you are ready to run `Stereo-Depth-Estimation-Network` on  your computer. 
+Now, you are ready to run `sdenet` on  your computer. 
 
 
 ## Tutorial: how to use
@@ -105,10 +111,10 @@ Now, you are ready to run `Stereo-Depth-Estimation-Network` on  your computer.
     Takes the path of left and right image, depth(Unit: m) and camera parameters--baseline, focal and pixel_size.. Returns a list of coordinates(x, y) of pixels on the depth image. 
 
 #### Depth Estimation Demo
-The Demo is located at `(Your Path)/Stereo-Depth-Estimation-Network/Stereo-Depth-Estimation-Network/utils`. Enter the following command to launch after finishing installation:
+The Demo is located at `(Your Path)/sdenet/sdenet/utils`. Enter the following command to launch after finishing installation:
 
 ```
-cd Stereo-Depth-Estimation-Network/utils
+cd sdenet/utils
 python SdenetDemo.py
 ```
 
