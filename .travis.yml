@@ -18,10 +18,6 @@ install:
 
     - hash -r
 
-    - conda create --name stereo python=2.7
-
-    - conda activate stereo
-
     - conda install PyQt5
 
     - pip install -r requirements.txt
